@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/31f09b9670.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Document</title>
+</head>
+
+<body> 
+    <div class="container">
+        <div class="score hide"></div>
+        <div class="game">
+            <div class="start">Что бы начать игру нажми сюда!</div>
+            <div class="gross">
+            <div class="gameArea"></div>
+        </div>
+        </div>
+    </div>
+    <!-- Окно GAME OVER -->
+    <div class="modal__win hide">
+        <div class="modal__target">
+            <div class="modal__content">
+                <div class="modal__text">
+                    <h2>Game Over</h2>
+                </div>
+                <p class="modal_score"></p>
+                <div class="modal__restart">
+                    <button class="btn_res">
+                        <img class="res" src="./image/reload-webpage_icon-icons.com_53905.png" alt="">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Окно Начала игры -->
+    <div class="modal__start">
+        <div class="modal__targett">
+            <div class="modal__cont">
+                <div class="mod__text">
+                    <h2>Старт</h2>
+                </div>
+                <div class="modal__choose-car">
+                    <img src="./image/Слой 6.png" alt="car" class="mod__img">
+                    <img src="./image/Слой 5.png" alt="car" class="mod__img">
+                    <img src="./image/Слой 8.png" alt="car" class="mod__img">
+                    <img src="./image/Слой 10.png" alt="car" class="mod__img">
+                </div>
+                <div class="modal__car">
+                    <h3>Выберите машину</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="./js/main.js"></script>
+
+</body>
+
+</html>
