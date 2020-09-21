@@ -66,8 +66,9 @@ function startGame() {
         //Рандомный выбор машины enemy      
         image = ['../image/enemy1.png', '../image/enemy2.png', '../image/enemy3.png', '../image/enemy4.png', '../image/enemy5.png', '../image/enemy6.png', '../image/enemyBig.png', '../image/enemy7.png', '../image/enemy8.png', '../image/enemy9.png'];
 
-        let a = Math.round(Math.random() * image.length); 
+        let a = Math.round(Math.random() * 9); 
         enemy.style.background = `transparent url(${image[a]}) center / cover no-repeat`;
+        delete image[a];
         
         gameArea.appendChild(enemy);
     }

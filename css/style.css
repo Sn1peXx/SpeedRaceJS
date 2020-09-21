@@ -54,7 +54,7 @@ table {
 }
 
 .car, .enemy {
-    width: 52px;
+    width: 54px;
     height: 115px;
     position: absolute;
 }
@@ -71,7 +71,6 @@ table {
 
 .gross {
     background: rgb(34, 180, 34);
-    
 }
 
 .line, .line2 {
@@ -228,13 +227,14 @@ table {
 .modal__choose-car {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 40px;
 }
 
 .modal__car {
     text-align: center;
     font-size: 24px;
     color: black;
-    padding: 50px 100px 40px 100px;
+    padding: 0px 100px 40px 100px;
     font-family: 'Press Start 2P', cursive;
     text-transform: uppercase;
 }
@@ -258,4 +258,41 @@ table {
     transform: scale(1.2);
     transition: .9s;
     cursor: pointer;
+}
+
+.modal__lvl {
+    text-align: center;
+    font-size: 24px;
+    color: black;
+    padding: 0px 100px 40px 100px;
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+}
+
+.modal__choose-lvl {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: -20px;
+    padding-bottom: 20px;
+}
+
+.btn__lvl {
+    margin-left: 20px;
+    padding: 15px 45px;
+    cursor: pointer;
+    border-radius: 15px;
+    border: 2px solid black;
+    background:white;
+    font-family: 'Press Start 2P', cursive;
+}
+
+
+.btn__lvl:focus {
+    outline: none !important;
+    border-radius: 15px;
+    border: 2px solid white;
+    transition: .5s;
+    color: white;
+    background: rgb(0, 0, 0);
 }
