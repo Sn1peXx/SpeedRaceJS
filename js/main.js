@@ -26,26 +26,34 @@ const keys = {
 const setting = { 
     start: false,
     score: 0,
-    speed: 5,
-    traffic: 3
+    speed: 7,
+    traffic: 2
 };
 
 function getQuantityElements(heightElemnt) {
     return document.documentElement.clientHeight / heightElemnt + 1;
 }
 
+// Функция для начала игры
 function startGame() {
     score.classList.add('show');
     gameArea.innerHTML = '';
-    car.style.left = '125px';
+    car.style.left = '199px';
     car.style.top = 'auto';
     car.style.bottom = '10px';
     for( let i = 0; i < getQuantityElements(100); i++) {
         const line = document.createElement('div');
+        const line2 = document.createElement('div');
         line.classList.add('line');
         line.style.top = (i * 85) + 'px';
         line.y = i * 100;
+
+        line2.classList.add('line');
+        line2.style.top = (i * 85) + 'px';
+        line2.style.left = (150 + 140) + 'px';
+        line2.y = i * 100;
         gameArea.appendChild(line);
+        gameArea.appendChild(line2);
     }
 
     for (let i = 0; i < getQuantityElements(100 * setting.traffic); i++) {
@@ -55,17 +63,13 @@ function startGame() {
         enemy.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - 95)) + 'px';
         enemy.style.top = enemy.y + 'px';
         
-        //Рандомный выбор машины enemy
-        function chooseRandomCar() {
-            let a = Math.round(Math.random()*7); 
-        
-            image = ['../image/enemy1.png', '../image/enemy2.png', '../image/enemy3.png', '../image/enemy4.png', '../image/enemy5.png', '../image/enemy6.png', '../image/enemyBig.png'];
-            enemy.style.background = `transparent url(${image[a]}) center / cover no-repeat`;
-        
-            gameArea.appendChild(enemy);
-        }
+        //Рандомный выбор машины enemy      
+        image = ['../image/enemy1.png', '../image/enemy2.png', '../image/enemy3.png', '../image/enemy4.png', '../image/enemy5.png', '../image/enemy6.png', '../image/enemyBig.png', '../image/enemy7.png', '../image/enemy8.png', '../image/enemy9.png'];
 
-        chooseRandomCar();
+        let a = Math.round(Math.random() * image.length); 
+        enemy.style.background = `transparent url(${image[a]}) center / cover no-repeat`;
+        
+        gameArea.appendChild(enemy);
     }
 
 
@@ -78,6 +82,7 @@ function startGame() {
     
 };
 
+// ТОтслеживания нажатий во время игры
 function playGame() {
     if (setting.start === true) {
         setting.score += setting.speed;
@@ -100,9 +105,7 @@ function playGame() {
         car.style.left = setting.x + 'px';
         car.style.top = setting.y + 'px';
 
-        requestAnimationFrame(playGame);
-
-        speedEnemy(5000);
+        requestAnimationFrame(playGame);  
     }
 
 };
@@ -117,6 +120,7 @@ function stopRun(event) {
     keys[event.key] = false;
 };
 
+// Создание полос на дороге
 function moveRoad() {
     let lines = document.querySelectorAll('.line');
     lines.forEach((line) => {
@@ -127,8 +131,19 @@ function moveRoad() {
             line.y = -100;
         }
     });
+
+    let lines2 = document.querySelectorAll('.line2');
+    lines2.forEach((line) => {
+        line.y += setting.speed;
+        line.style.top = line.y + 'px';
+
+        if (line.y >= document.documentElement.clientHeight) {
+            line.y = -100;
+        }
+    });
 }
 
+// остановка игры при аварии с enemy
 function moveEnemy() {
     let enemy = document.querySelectorAll('.enemy');
 
@@ -142,7 +157,6 @@ function moveEnemy() {
             openEndModal();
         }
 
-
         item.y += setting.speed / 2;
         item.style.top = item.y + 'px';
 
@@ -155,48 +169,32 @@ function moveEnemy() {
     });
 }
 
-// Изменение скорости enemy
-function speedEnemy(startSpeed) {
 
-    if (setting.score >= startSpeed) {
-        setting.traffic = 2;
-    }
-
-    if (setting.score >= (startSpeed * 2)) {
-        setting.speed = 6;
-        setting.traffic = 3;
-    }
-
-    if (setting.score >= (startSpeed * 3)) {
-        setting.speed = 7;
-        setting.traffic = 3;
-    }
-
-    if (setting.score >= (startSpeed * 4)) {
-        setting.speed = 8;
-        setting.traffic = 2;
-    }
-}
-
+// ОТкрытие окна после поражения
 function openEndModal() {
     modal.classList.remove('hide');
     modal.classList.add('show');
     modalScore.innerHTML = `Ваш результат: ${setting.score}`;
+
+    if (setting.score >= 10000) {
+        window.image = [];
+    }
 }
 
+// Закрытие окна после поражения
 function closemodal() {
     restart.addEventListener('click', () => {
         modal.classList.remove('show');
         modal.classList.add('hide');
-        setting.speed = 5;
-        setting.traffic = 3;
+        setting.speed = 7;
+        setting.traffic = 2;
     });
 
 }
 
 closemodal();
 
-
+// Выбор машины перед началом игры
 modalCar.addEventListener('click', (e) => {
     const target = e.target;
 
