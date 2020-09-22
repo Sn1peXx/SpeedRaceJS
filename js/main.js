@@ -7,9 +7,11 @@ const score = document.querySelector('.score'),
       modalScore = document.querySelector('.modal_score'),
       modalImg = document.querySelectorAll('.mod__img'),
       modalCar = document.querySelector('.modal__choose-car'),
-      modalStart = document.querySelector('.modal__start');
+      modalStart = document.querySelector('.modal__start'),
+      btnLvl = document.querySelectorAll('.btn__lvl'),
+      mainCar = document.querySelector('.main__car');
 
-car.classList.add('car');
+car.classList.add('car'); 
  
 restart.addEventListener('click', startGame);
 
@@ -29,6 +31,8 @@ const setting = {
     speed: 7,
     traffic: 2
 };
+
+let SPEED;
 
 function getQuantityElements(heightElemnt) {
     return document.documentElement.clientHeight / heightElemnt + 1;
@@ -187,13 +191,54 @@ function closemodal() {
     restart.addEventListener('click', () => {
         modal.classList.remove('show');
         modal.classList.add('hide');
-        setting.speed = 7;
+        setting.speed = SPEED;
         setting.traffic = 2;
     });
 
 }
 
 closemodal();
+
+function removeActive() {
+    btnLvl.forEach(item => {
+        item.classList.remove('active');
+    });
+}
+
+function showActive(i = 1) {
+    btnLvl[i].classList.add('active');
+   
+    if (i == 0) {
+        SPEED = setting.speed = 7;
+    }
+
+    if (i == 1) {
+        SPEED = setting.speed = 10;
+    }
+
+    if (i == 2) {
+        SPEED = setting.speed = 13;
+    }
+}
+
+removeActive();
+showActive();
+
+btnLvl.forEach(btns => {
+    btns.addEventListener('click', (e) => {
+        const target = e.target;
+        
+       if (target) {
+        btnLvl.forEach((item, i) => {
+            if (target == item) {
+               removeActive();
+               showActive(i);
+               mainCar.classList.remove('hide');
+            }
+        });
+       } 
+    });
+});
 
 // Выбор машины перед началом игры
 modalCar.addEventListener('click', (e) => {

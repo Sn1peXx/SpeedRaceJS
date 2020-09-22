@@ -290,9 +290,22 @@ table {
 
 .btn__lvl:focus {
     outline: none !important;
+}
+
+.active {
+    outline: none !important;
     border-radius: 15px;
     border: 2px solid white;
     transition: .5s;
     color: white;
     background: rgb(0, 0, 0);
+}
+
+.notactive {
+    cursor: pointer;
+    border-radius: 15px;
+    border: 2px solid black;
+    background:white;
+    color: black;
+    font-family: 'Press Start 2P', cursive;
 }
