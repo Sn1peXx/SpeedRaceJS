@@ -22,7 +22,7 @@ const keys = {
     ArrowUp: false,
     ArrowDown: false,
     ArrowRight: false,
-    ArrowLeft: false
+    ArrowLeft: false,
 };
 
 const setting = { 

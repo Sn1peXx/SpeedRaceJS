@@ -226,7 +226,7 @@ table {
 
 .modal__choose-car {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     padding-bottom: 40px;
 }
 
