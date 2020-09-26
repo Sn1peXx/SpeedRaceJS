@@ -9,7 +9,8 @@ const score = document.querySelector('.score'),
       modalCar = document.querySelector('.modal__choose-car'),
       modalStart = document.querySelector('.modal__start'),
       btnLvl = document.querySelectorAll('.btn__lvl'),
-      mainCar = document.querySelector('.main__car');
+      mainCar = document.querySelector('.main__car'),
+      openStartModall = document.querySelector('.home__modal');
 
 car.classList.add('car'); 
  
@@ -146,6 +147,7 @@ function moveRoad() {
             line.y = -100;
         }
     });
+ 
 }
 
 // остановка игры при аварии с enemy
@@ -194,7 +196,6 @@ function closemodal() {
         setting.speed = SPEED;
         setting.traffic = 2;
     });
-
 }
 
 closemodal();
@@ -217,7 +218,7 @@ function showActive(i = 1) {
     }
 
     if (i == 2) {
-        SPEED = setting.speed = 13;
+        SPEED = setting.speed = 12;
     }
 }
 
@@ -241,6 +242,7 @@ btnLvl.forEach(btns => {
 });
 
 // Выбор машины перед началом игры
+function openStartModa() {
 modalCar.addEventListener('click', (e) => {
     const target = e.target;
 
@@ -249,26 +251,40 @@ modalCar.addEventListener('click', (e) => {
             if (target == items) {
                 if (i == 0) {
                     car.style.background = `transparent url('../image/player1.png') center / cover no-repeat`;
-                    closeModal();
+                    closeModa();
                 }
                 if (i == 1) {
                     car.style.background = `transparent url('../image/player2.png') center / cover no-repeat`;
-                    closeModal();
+                    closeModa();
                 }
                 if (i == 2) {
                     car.style.background = `transparent url('../image/player3.png') center / cover no-repeat`;
-                    closeModal();
+                    closeModa();
                 }
                 if (i == 3) {
                     car.style.background = `transparent url('../image/player4.png') center / cover no-repeat`;
-                    closeModal();
+                    closeModa();
                 }
                 startGame();
             }
         });
     }
 });
+}
 
-function closeModal() {
+openStartModa();
+
+function closeModa() {
     modalStart.classList.add('hide');
 }
+
+//Открытие стартового окна после поражения
+function startModalOpen() {
+    openStartModall.addEventListener('click', () => {
+        modal.classList.remove('show');
+        modal.classList.add('hide');
+        modalStart.classList.remove('hide');
+    });
+}
+
+startModalOpen();

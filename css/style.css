@@ -70,7 +70,8 @@ table {
 }
 
 .gross {
-    background: rgb(34, 180, 34);
+    /* background: url('../image/трава_10.jpg') center / cover no-repeat; */
+    background: rgb(10, 121, 29);
 }
 
 .line, .line2 {
@@ -186,11 +187,39 @@ table {
     -webkit-transform: scale(1.2);
     -ms-transform: scale(1.2);
     transform: scale(1.2);
-    transition: .4s;
+    transition: .6s;
 }
 
 .btn_res:focus {
     outline: none;
+}
+
+.home__modal {
+    background-color: black;
+    border: transparent;
+    color: inherit;
+    border-color: inherit;
+    padding: 10px 35px;
+    border-radius: 10px;
+    border-width: 0;
+    cursor: pointer;
+    margin-left: 100px;
+}
+
+.home__modal:hover {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    transition: .6s;
+}
+
+.home__modal:focus {
+    outline: none;
+}
+
+.fa-home {
+    color:white;
+    font-size: 33px;
 }
 
 .modal__start {
