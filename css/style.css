@@ -455,6 +455,22 @@ table {
   }
 }
 
+.size {
+    animation: size 1.5s ease-in-out infinite;
+}
+
+@keyframes size {
+    from {
+        transform: scale(.85);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      to {
+        transform: scale(.85);
+      }
+}
+
 /* Скрытые машины */
 
 .fa-sort-down {
@@ -468,4 +484,17 @@ table {
 
 .rotate {
     transform: rotate(180deg);
+}
+
+.important {
+    font-size: 30px;
+    background-color: red;
+    color: white;
+    border-radius: 50px;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    left: 615px;
+    top: -99px;
 }

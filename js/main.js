@@ -15,7 +15,8 @@ const score = document.querySelector('.score'),
       modalRecord = document.querySelector('.modal_record'),
       animationText = document.querySelector('.area'),
       downButton = document.querySelector('.fa-sort-down'),
-      a = document.querySelectorAll('a');
+      a = document.querySelectorAll('a'),
+      importt = document.querySelector('.important');
 
 modal.classList.add('hide');
 
@@ -111,16 +112,17 @@ function startGame() {
     setting.x = car.offsetLeft;
     setting.y = car.offsetTop;
     requestAnimationFrame(playGame);
-    
 };
 
 // ТОтслеживания нажатий во время игры
 function playGame() {
     if (setting.start === true) {
         setting.score += setting.speed;
+
         // Сохраняем рекрод 
         if (setting.score > RECORD) {
             RECORD = setting.score;
+            // Появление надписи рекорд
             while(!FGAME) {
                 while(COUNT) {
                 animationText.innerHTML = 'Рекорд';
@@ -137,11 +139,12 @@ function playGame() {
             FGAME = true;
         };
         
-        
+        //  Если рекорд новый
             score.innerHTML = 'SCROE<br>' + setting.score;
             
             modalRecord.innerHTML = `Новый рекорд: <span class="red">${RECORD}</span>!`;
         } else {
+            //  Если рекорд старый
             modalRecord.innerHTML = `Рекорд: <span class="red">${RECORD}</span>!`;
             animationText.innerHTML = ''
             score.classList.add('show');
@@ -171,25 +174,30 @@ function playGame() {
         car.style.top = setting.y + 'px';
 
         requestAnimationFrame(playGame); 
-             
     }
 
+    // Открытие новых машин при рекорде
     if (RECORD >= 15000) {
+        addImport();
+        addRedButton();
         openFirstCar();
     }
     
     if (RECORD >= 30000) {
+        addImport1();
         openFirstCar();
         openSecondCar();
     }
 
     if (RECORD >= 50000) {
+        addImport2();
         openFirstCar();
         openSecondCar();
         openThirdCar();
     }
 
     if (RECORD >= 80000) {
+        addImport3();
         openFirstCar();
         openSecondCar();
         openThirdCar();
@@ -202,11 +210,69 @@ modalImg2.forEach(item => {
     item.style.pointerEvents = 'none';
 });
 
+// Переменные для единичного вызова функции
+let q = true;
+let l = true;
+let c = true;
+let p = true;
+let z = true;
+
+
+// Добавление анимации и красного цвета для кнопки
+function addRedButton () {
+    if (l){
+        downButton.style.color = "red";
+        downButton.classList.add('size');
+    }
+    l = false;
+}
+
+// ДОбавление воскл знака при открытии нового авто
+function addImport () {
+    if (q){
+        importt.classList.remove('hide');
+        importt.classList.add('show');
+    }
+    q = false;
+}
+
+function addImport1 () {
+    if (c){
+        importt.classList.remove('hide');
+        importt.classList.add('show');
+    }
+    c = false;
+}
+
+function addImport2 () {
+    if (p){
+        importt.classList.remove('hide');
+        importt.classList.add('show');
+    }
+    p= false;
+}
+
+function addImport3 () {
+    if (z){
+        importt.classList.remove('hide');
+        importt.classList.add('show');
+    }
+    z = false;
+}
+
+// Убираем воскл знак
+function removeImport() {
+    importt.classList.add('hide');
+    importt.classList.remove('show');
+}
+
 
 // Функции для открытия нового авто
 function openFirstCar() {
     modalImg2[0].src = './image/mitsubishi_PNG189.png';
+    // Изменение курсорв
     modalImg2[0].style.cursor = "pointer"; 
+    // Черный цвет для картинки
     modalImg2[0].style.filter = "brightness(1)";
     modalImg2[0].style.pointerEvents = 'auto';
 }
@@ -231,7 +297,6 @@ function openFourthCar() {
     modalImg2[0, 1, 2, 3].style.filter = "brightness(1)";
     modalImg2[0, 1, 2, 3].style.pointerEvents = 'auto';
 }
-
 
 
 
@@ -379,6 +444,7 @@ function showActive(i = 1) {
 removeActive();
 showActive();
 
+//  Выбор уровня сложности
 btnLvl.forEach(btns => {
     btns.addEventListener('click', (e) => {
         const target = e.target;
@@ -425,7 +491,7 @@ modalCar.addEventListener('click', (e) => {
         });
     }
 
-    
+    // Выбор машин со 2 страницы
     if (target && target.classList.contains('mod__img2')) {
         modalImg2.forEach((items, i) => {
             if (target == items) {
@@ -471,12 +537,16 @@ function startModalOpen() {
 startModalOpen();
 
 // Показ новый скрытых машин
-
 downButton.addEventListener('click', () => {
+    downButton.classList.remove('size');
+    downButton.style.color = "black";
+    removeImport();
+    // переворачиваем кнопку 
     downButton.classList.toggle('rotate');   
     showHideCar(); 
 });
 
+// Переключение страниц с машиинами
 function showHideCar() {
     modalImg.forEach(item => {
         item.classList.toggle("hide");
@@ -486,4 +556,3 @@ function showHideCar() {
         item.classList.toggle("hide");
     });
 }
-
