@@ -12,22 +12,29 @@
 
 <body> 
     <div class="container">
-        <div class="score hide"></div>
+        <div class="score hide">
+            <div class="area"></div>
+        </div>
         <div class="game">
             <div class="start">Что бы начать игру нажми сюда!</div>
             <div class="gross">
-            <div class="gameArea"></div>
+            <div class="gameArea">
+                
+            </div>
         </div>
         </div>
     </div>
     <!-- Окно GAME OVER -->
-    <div class="modal__win hide">
+    <div class="modal__win">
         <div class="modal__target">
             <div class="modal__content">
+                <div class="modal__re">
                 <div class="modal__text">
                     <h2>Game Over</h2>
                 </div>
                 <p class="modal_score"></p>
+                <p class="modal_record"></p>
+            </div>
                 <div class="modal__restart">
                     <button class="btn_res">
                         <img class="res" src="./image/reload-webpage_icon-icons.com_53905.png" alt="">
@@ -41,7 +48,7 @@
     </div>
 
     <!-- Окно Начала игры -->
-    <div class="modal__start ">
+    <div class="modal__start">
         <div class="modal__targett">
             <div class="modal__cont">
                 <div class="mod__text">
@@ -59,12 +66,26 @@
                 <div class="modal__car">
                     <h3>Выберите машину</h3>
                 </div>
-                <div class="modal__choose-car">
+                <div class="modal__choose-car onselectstart="return false" onmousedown="return false">
                     <img src="./image/Слой 6.png" alt="car" class="mod__img">
                     <img src="./image/Слой 5.png" alt="car" class="mod__img">
                     <img src="./image/Слой 8.png" alt="car" class="mod__img">
                     <img src="./image/Слой 10.png" alt="car" class="mod__img">
+
+                    <div class="a" title="Необходимо набрать не менее 15000 очков">
+                    <img src="./image/mitsubishi_PNG189hide.png"  title="Необходимо набрать не менее 15000 очков" alt="car" class="mod__img2 carrrrr hide">
+                    </div>
+                    <div class="b" title="Необходимо набрать не менее 30000 очков">
+                    <img src="./image/porschehide.png" alt="car"  title="Необходимо набрать не менее 30000 очков" class="mod__img2 hide">
+                    </div>
+                    <div class="a" title="Необходимо набрать не менее 50000 очков">
+                    <img src="./image/minihide.png" alt="car" title="Необходимо набрать не менее 50000 очков" class="mod__img2 hide">
+                    </div>
+                    <div class="a" title="Необходимо набрать не менее 80000 очков">
+                    <img src="./image/bugattihide.png" alt="car" title="Необходимо набрать не менее 80000 очков" class="mod__img2 cappppp hide">
                 </div>
+                </div>
+                <i class="fas fa-sort-down  onselectstart="return false" onmousedown="return false""></i>
             </div>
             </div>
         </div>

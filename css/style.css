@@ -74,7 +74,7 @@ table {
     background: rgb(10, 121, 29);
 }
 
-.line, .line2 {
+.line, .line2, .line3 {
     position: absolute;
     width: 10px;
     height: 50px;
@@ -147,6 +147,11 @@ table {
     text-transform: uppercase;
 }
 
+.modal__re {
+    position: relative;
+    top:-20px;
+}
+
 .modal_score {
     text-align: center;
     font-size: 24px;
@@ -154,6 +159,17 @@ table {
     position: relative;
     top: -60px;
     left: -30px;
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+}
+
+.modal_record {
+    text-align: center;
+    font-size: 24px;
+    color: rgb(0, 0, 0);
+    position: relative;
+    top: -40px;
+    text-align: center;
     font-family: 'Press Start 2P', cursive;
     text-transform: uppercase;
 }
@@ -226,7 +242,7 @@ table {
     width: 100%;
     height: 100%;
     position: fixed;
-    top: 0;
+    top: -80px;
     left: 0;
     z-index: 1050;
 }
@@ -277,11 +293,69 @@ table {
     margin-left: 20px;
 }
 
-.mod__img:last-child {
-    margin-right: 20px;
+.mod__img:nth-child(4) {
+    margin-right: -40px;
 }
 
 .mod__img:hover {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    transition: .9s;
+    cursor: pointer;
+}
+
+
+.mod__img2 {
+    width: 140px;
+    height: 90px;
+    filter: brightness(0);
+}
+
+.mod__img2:nth-child(6) {
+    height: 70px;
+    position: relative;
+    top: 15px;
+    margin-left: 15px;
+    cursor: no-drop;
+}
+
+.carrrrr {
+    height: 70px;
+    position: relative;
+    top:11px;
+    left: 10px;
+}
+
+.cappppp {
+    width: 150px;
+    position: relative;
+    top: 6px;
+    right: 10px;
+    cursor: no-drop;
+}
+
+.mod__img2:nth-child(8) {
+    width: 150px;
+    position: relative;
+    top: 10px;
+    margin-right: 10px;
+    cursor: no-drop;
+}
+
+.mod__img2:nth-child(2) {
+    height: 95px;  
+    position: relative;
+    top: 115px;
+    cursor: no-drop;
+}
+
+.mod__img2:nth-child(7) {
+    height: 95px;  
+    cursor: no-drop;
+}
+
+.mod__img2:hover {
     -webkit-transform: scale(1.2);
     -ms-transform: scale(1.2);
     transform: scale(1.2);
@@ -337,4 +411,61 @@ table {
     background:white;
     color: black;
     font-family: 'Press Start 2P', cursive;
+}
+
+.red {
+     color: red;
+}
+
+/* Анимация текста */
+
+.area {
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  font-size: 3em;
+  position: relative;
+  margin-top: 40px;
+  color: #e75300;
+  font-weight: 700;
+  text-transform: uppercase;
+  animation: blur 2s ease-out infinite;
+  text-shadow: 0px 0px 5px #fff, 0px 0px 7px #fff;
+}
+
+@keyframes blur {
+  from {
+    text-shadow:0px 0px 10px #fff,
+      0px 0px 10px #fff, 
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 50px #fff,
+      0px 0px 50px #fff,
+      0px 0px 50px #7B96B8,
+      0px 0px 50px #7B96B8,
+      0px 10px 50px #7B96B8,
+      0px 10px 50px #7B96B8,
+      0px 10px 50px #7B96B8,
+      0px 10px 50px #7B96B8,
+      0px -10px 50px #7B96B8,
+      0px -10px 50px #7B96B8;
+  }
+}
+
+/* Скрытые машины */
+
+.fa-sort-down {
+    font-size: 60px;
+    position: relative;
+    left: 48%;
+    top: -25px;
+    cursor: pointer;
+    transform: rotate(360deg);
+}
+
+.rotate {
+    transform: rotate(180deg);
 }

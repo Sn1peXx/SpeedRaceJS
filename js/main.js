@@ -6,11 +6,18 @@ const score = document.querySelector('.score'),
       modal = document.querySelector('.modal__win'),
       modalScore = document.querySelector('.modal_score'),
       modalImg = document.querySelectorAll('.mod__img'),
+      modalImg2 = document.querySelectorAll('.mod__img2'),
       modalCar = document.querySelector('.modal__choose-car'),
       modalStart = document.querySelector('.modal__start'),
       btnLvl = document.querySelectorAll('.btn__lvl'),
       mainCar = document.querySelector('.main__car'),
-      openStartModall = document.querySelector('.home__modal');
+      openStartModall = document.querySelector('.home__modal'),
+      modalRecord = document.querySelector('.modal_record'),
+      animationText = document.querySelector('.area'),
+      downButton = document.querySelector('.fa-sort-down'),
+      a = document.querySelectorAll('a');
+
+modal.classList.add('hide');
 
 car.classList.add('car'); 
  
@@ -34,21 +41,32 @@ const setting = {
 };
 
 let SPEED;
+let RECORD = 0;
+let COUNT = true;
+let FGAME = true;
+
+
 
 function getQuantityElements(heightElemnt) {
     return document.documentElement.clientHeight / heightElemnt + 1;
 }
 
+
+
 // Функция для начала игры
 function startGame() {
     score.classList.add('show');
     gameArea.innerHTML = '';
-    car.style.left = '199px';
+    gameArea.appendChild(animationText);
+    animationText.style.zIndex = 2000;
+    car.style.left = 45 + "%";
     car.style.top = 'auto';
     car.style.bottom = '10px';
     for( let i = 0; i < getQuantityElements(100); i++) {
         const line = document.createElement('div');
         const line2 = document.createElement('div');
+        const line3 = document.createElement('div');
+
         line.classList.add('line');
         line.style.top = (i * 85) + 'px';
         line.y = i * 100;
@@ -57,15 +75,23 @@ function startGame() {
         line2.style.top = (i * 85) + 'px';
         line2.style.left = (150 + 140) + 'px';
         line2.y = i * 100;
+
+        // 3 линия
+        line3.classList.add('line');
+        line3.style.top = (i * 85) + 'px';
+        line3.style.left = (300 + 140) + 'px';
+        line3.y = i * 100;
+
         gameArea.appendChild(line);
         gameArea.appendChild(line2);
+        gameArea.appendChild(line3);
     }
 
-    for (let i = 0; i < getQuantityElements(100 * setting.traffic); i++) {
+    for (let i = 0; i < getQuantityElements(120 * setting.traffic); i++) {
         const enemy = document.createElement('div');
         enemy.classList.add('enemy');
-        enemy.y = -150 * setting.traffic * (i + 1);
-        enemy.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - 95)) + 'px';
+        enemy.y = -310 * setting.traffic * (i + 1);
+        enemy.style.left = Math.floor(Math.random() * (gameArea.offsetWidth -255)) + 'px';
         enemy.style.top = enemy.y + 'px';
         
         //Рандомный выбор машины enemy      
@@ -92,7 +118,40 @@ function startGame() {
 function playGame() {
     if (setting.start === true) {
         setting.score += setting.speed;
-        score.innerHTML = 'SCROE<br>' + setting.score;
+        // Сохраняем рекрод 
+        if (setting.score > RECORD) {
+            RECORD = setting.score;
+            while(!FGAME) {
+                while(COUNT) {
+                animationText.innerHTML = 'Рекорд';
+                score.classList.remove('show');
+                score.classList.add('hide');
+                setTimeout(() => {
+                    animationText.innerHTML = ''
+                    score.classList.add('show');
+                    score.classList.remove('hide');
+                   
+                }, 1800)
+                COUNT=false;
+            };
+            FGAME = true;
+        };
+        
+        
+            score.innerHTML = 'SCROE<br>' + setting.score;
+            
+            modalRecord.innerHTML = `Новый рекорд: <span class="red">${RECORD}</span>!`;
+        } else {
+            modalRecord.innerHTML = `Рекорд: <span class="red">${RECORD}</span>!`;
+            animationText.innerHTML = ''
+            score.classList.add('show');
+            score.classList.remove('hide');
+            score.innerHTML = 'SCROE<br>' + setting.score;
+        }
+        
+        
+        // Записываем RECORD в localStorage
+        localStorage.setItem("RECORD", RECORD);
         moveRoad();
         moveEnemy();
         if (keys.ArrowLeft && setting.x > 0) {
@@ -111,10 +170,75 @@ function playGame() {
         car.style.left = setting.x + 'px';
         car.style.top = setting.y + 'px';
 
-        requestAnimationFrame(playGame);  
+        requestAnimationFrame(playGame); 
+             
     }
 
+    if (RECORD >= 15000) {
+        openFirstCar();
+    }
+    
+    if (RECORD >= 30000) {
+        openFirstCar();
+        openSecondCar();
+    }
+
+    if (RECORD >= 50000) {
+        openFirstCar();
+        openSecondCar();
+        openThirdCar();
+    }
+
+    if (RECORD >= 80000) {
+        openFirstCar();
+        openSecondCar();
+        openThirdCar();
+        openFourthCar();
+    }
 };
+
+// Запрет выбора закрытого авто
+modalImg2.forEach(item => {
+    item.style.pointerEvents = 'none';
+});
+
+
+// Функции для открытия нового авто
+function openFirstCar() {
+    modalImg2[0].src = './image/mitsubishi_PNG189.png';
+    modalImg2[0].style.cursor = "pointer"; 
+    modalImg2[0].style.filter = "brightness(1)";
+    modalImg2[0].style.pointerEvents = 'auto';
+}
+
+function openSecondCar() {
+    modalImg2[1].src = './image/porsche.png';
+    modalImg2[1].style.cursor = "pointer"; 
+    modalImg2[0, 1].style.filter = "brightness(1)";
+    modalImg2[0, 1].style.pointerEvents = 'auto';
+}
+
+function openThirdCar() {
+    modalImg2[2].src = './image/mini.png';
+    modalImg2[2].style.cursor = "pointer"; 
+    modalImg2[0, 1, 2].style.filter = "brightness(1)";
+    modalImg2[0, 1, 2].style.pointerEvents = 'auto';
+}
+
+function openFourthCar() {
+    modalImg2[3].src = './image/bugatti.png';
+    modalImg2[3].style.cursor = "pointer"; 
+    modalImg2[0, 1, 2, 3].style.filter = "brightness(1)";
+    modalImg2[0, 1, 2, 3].style.pointerEvents = 'auto';
+}
+
+
+
+
+function showNewRecord() {
+    animationText.classList.remove('hide'); 
+    animationText.classList.add('show');
+}
 
 function startRun(event) {
     event.preventDefault();
@@ -147,8 +271,20 @@ function moveRoad() {
             line.y = -100;
         }
     });
- 
+
+    //Дорога
+    let lines3 = document.querySelectorAll('.line3');
+    lines3.forEach((line) => {
+        line.y += setting.speed;
+        line.style.top = line.y + 'px';
+
+        if (line.y >= document.documentElement.clientHeight) {
+            line.y = -100;
+        }
+    });
 }
+
+
 
 // остановка игры при аварии с enemy
 function moveEnemy() {
@@ -182,23 +318,37 @@ function openEndModal() {
     modal.classList.remove('hide');
     modal.classList.add('show');
     modalScore.innerHTML = `Ваш результат: ${setting.score}`;
-
-    if (setting.score >= 10000) {
-        window.image = [];
-    }
 }
 
 // Закрытие окна после поражения
 function closemodal() {
-    restart.addEventListener('click', () => {
         modal.classList.remove('show');
         modal.classList.add('hide');
         setting.speed = SPEED;
         setting.traffic = 2;
-    });
+        animationText.style.opacity = 1;
+        FGAME = false;
+        COUNT = true;
 }
 
-closemodal();
+//Закрытие по Enter
+document.addEventListener('keydown', (e) => {
+    if (e.key === ' ' || e.key == 'Enter') {
+        if(document.querySelector(".modal__start").classList.contains("hide") && 
+           document.querySelector(".modal__win").classList.contains("show")){
+            closemodal();
+            startGame();
+        }
+        
+        
+    }
+});
+
+//Рестарт игры после аварии
+restart.addEventListener('click', () => {    
+    closemodal();
+});
+
 
 function removeActive() {
     btnLvl.forEach(item => {
@@ -206,19 +356,23 @@ function removeActive() {
     });
 }
 
+// Показываем выбранную сложность
 function showActive(i = 1) {
     btnLvl[i].classList.add('active');
    
     if (i == 0) {
         SPEED = setting.speed = 7;
+        gameArea.style.width = 600 + 'px';
     }
 
     if (i == 1) {
-        SPEED = setting.speed = 10;
+        SPEED = setting.speed = 10;   
+        gameArea.style.width = 440 + 'px';  
     }
 
     if (i == 2) {
         SPEED = setting.speed = 12;
+        gameArea.style.width = 440 + 'px';
     }
 }
 
@@ -265,6 +419,33 @@ modalCar.addEventListener('click', (e) => {
                     car.style.background = `transparent url('../image/player4.png') center / cover no-repeat`;
                     closeModa();
                 }
+                
+                startGame();
+            }
+        });
+    }
+
+    
+    if (target && target.classList.contains('mod__img2')) {
+        modalImg2.forEach((items, i) => {
+            if (target == items) {
+                if (i == 0) {
+                    car.style.background = `transparent url('../image/player5.png') center / cover no-repeat`;
+                    closeModa();
+                }
+                if (i == 1) {
+                    car.style.background = `transparent url('../image/player7.png') center / cover no-repeat`;
+                    closeModa();
+                }
+                if (i == 2) {
+                    car.style.background = `transparent url('../image/player8.png') center / cover no-repeat`;
+                    closeModa();
+                }
+                if (i == 3) {
+                    car.style.background = `transparent url('../image/player6.png') center / cover no-repeat`;
+                    closeModa();
+                }
+
                 startGame();
             }
         });
@@ -288,3 +469,21 @@ function startModalOpen() {
 }
 
 startModalOpen();
+
+// Показ новый скрытых машин
+
+downButton.addEventListener('click', () => {
+    downButton.classList.toggle('rotate');   
+    showHideCar(); 
+});
+
+function showHideCar() {
+    modalImg.forEach(item => {
+        item.classList.toggle("hide");
+    });
+    
+    modalImg2.forEach(item => {
+        item.classList.toggle("hide");
+    });
+}
+
