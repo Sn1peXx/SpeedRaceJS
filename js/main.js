@@ -92,7 +92,7 @@ function startGame() {
         const enemy = document.createElement('div');
         enemy.classList.add('enemy');
         enemy.y = -310 * setting.traffic * (i + 1);
-        enemy.style.left = Math.floor(Math.random() * (gameArea.offsetWidth -255)) + 'px';
+        enemy.style.left = Math.floor(Math.random() * (gameArea.offsetWidth -125)) + 'px';
         enemy.style.top = enemy.y + 'px';
         
         //Рандомный выбор машины enemy      
@@ -140,7 +140,7 @@ function playGame() {
         };
         
         //  Если рекорд новый
-            score.innerHTML = 'SCROE<br>' + setting.score;
+            score.innerHTML = 'SCORE<br>' + setting.score;
             
             modalRecord.innerHTML = `Новый рекорд: <span class="red">${RECORD}</span>!`;
         } else {
@@ -528,6 +528,7 @@ function closeModa() {
 //Открытие стартового окна после поражения
 function startModalOpen() {
     openStartModall.addEventListener('click', () => {
+        removeImport();
         modal.classList.remove('show');
         modal.classList.add('hide');
         modalStart.classList.remove('hide');
@@ -540,7 +541,6 @@ startModalOpen();
 downButton.addEventListener('click', () => {
     downButton.classList.remove('size');
     downButton.style.color = "black";
-    removeImport();
     // переворачиваем кнопку 
     downButton.classList.toggle('rotate');   
     showHideCar(); 
